@@ -1,54 +1,33 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+### mobile-e-shop-front-end
+mobile screen max-width:768px
+## pages
+Home 
+Product detail page
+Cart Page
+Checkout Page
+Payment Page
 
-## 🚀 Quick start
+Product feature:
+(1) resume/CV builder, with design $2
+    a. embed indeed/linked display job list after enter job title
+    b. display recommand description when enter job description
+(2) Contact professition to custom (email?Chatbot?)
+(3) publish your resume via indeed
 
-1.  **Create a Gatsby site.**
+resume builder:
+(1) https://lakshyajit165.medium.com/resume-builder-using-react-and-node-js-d50e3450f89
+(2)https://github.com/AmruthPillai/Reactive-Resume
+(3)https://github.com/saadq/resumake.io
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+https://stackoverflow.com/questions/39395158/onauthstatechanged-inconsistent#39395158
+https://medium.com/@thanhbinh.tran93/private-route-public-route-and-restricted-route-with-react-router-d50b27c15f5e
+back-end:
+Node.js with firebase
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
 
-2.  **Start developing.**
-
-    Navigate into your new site’s directory and start it up.
-
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
-
-3.  **Open the code and start customizing!**
-
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.js` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+### website road map
+Account 
+    profile
+    downlaod
+    logout
+    

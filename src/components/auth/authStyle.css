@@ -1,0 +1,33 @@
+/*register page*/
+.regForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:6rem auto;
+}
+.eye-icon{
+    color:#1cbf90;
+    position: relative;
+    bottom: 30px;
+    left:167px;
+}
+.email-container{
+    margin-bottom: 1rem;
+}
+.register-errorMsg {
+    margin-top: 3rem;
+    color:#ca3c3f;
+}
+.auth-function-container{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.auth-function{
+    color:#1b79d3;
+    text-align: left;
+}
+.auth-submit-btn{
+    margin-top: 50px;
+}
