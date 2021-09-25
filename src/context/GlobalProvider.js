@@ -4,36 +4,50 @@ import { GET_USER_AUTH } from "./type";
 import { GlobalContext } from "./GlobalContext";
 import firebase from "gatsby-plugin-firebase";
 const GlobalProvider = (props) => {
-
   const [authInfo, setAuthInfo] = useState({
     errorMsg: "",
     email: "",
     user: null,
-    loading:false
+    loading: false,
   });
   // const [State, dispatch] = useReducer(globalReducer, initState);
-  const signUpHandler = (email, password) => {
-    return firebase.auth().createUserWithEmailAndPassword(email, password);
+  const user = firebase.auth().currentUser;
+  const signUpHandler = (email, password, username) => {
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        
+        user.updateProfile({
+          displayName: username,
+        });
+      });
   };
-  const loginHandler = (email, password)=>{
-    return firebase.auth().signInWithEmailAndPassword(email, password)
+  const loginHandler = (email, password) => {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  };
+  const signOutHandler = () => {
+    return firebase.auth().signOut();
+  };
+  const resetPasswordHandler = (email) => {
+    return firebase.auth().sendPasswordResetEmail(email);
+  };
+  const updateEmail=(email)=>{
+    return user.updateEmail(email)
   }
-  const signOutHandler = ()=>{
-    return firebase.auth().signOut()
-  }
-  const resetPasswordHandler = (email)=>{
-    return firebase.auth().sendPasswordResetEmail(email)
+  const updatePassword = (password) =>{
+    return user.updatePassword(password)
   }
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       setAuthInfo({
         ...authInfo,
         user: user,
-        loading:true
+        loading: true,
       });
     });
-    
-    return unsubscribe
+
+    return unsubscribe;
   }, []);
 
   return (
@@ -43,10 +57,12 @@ const GlobalProvider = (props) => {
         loginHandler,
         signOutHandler,
         resetPasswordHandler,
+        updateEmail,
+        updatePassword,
         authInfo,
       }}
     >
-      {authInfo.loading&&props.children}
+      {authInfo.loading && props.children}
     </GlobalContext.Provider>
   );
 };

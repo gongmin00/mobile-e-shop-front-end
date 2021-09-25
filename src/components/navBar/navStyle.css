@@ -30,7 +30,7 @@
 }
 .nav-list-item {
   list-style-type: none;
-  padding-left: 10%;
+  padding-left: 5%;
   min-width: fit-content;
   color: aliceblue;
   display: flex;

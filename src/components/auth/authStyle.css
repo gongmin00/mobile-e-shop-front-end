@@ -1,33 +1,129 @@
-/*register page*/
-.regForm{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin:6rem auto;
+/*signup page*/
+.regForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 6rem auto;
 }
-.eye-icon{
-    color:#1cbf90;
-    position: relative;
-    bottom: 30px;
-    left:167px;
+.eye-icon {
+  color: #1cbf90;
+  position: relative;
+  bottom: 30px;
+  left: 167px;
 }
-.email-container{
-    margin-bottom: 1rem;
+.email-container {
+  margin-bottom: 1rem;
+}
+.username-container {
+  margin-bottom: 1rem;
 }
 .register-errorMsg {
-    margin-top: 3rem;
-    color:#ca3c3f;
+  margin-top: 3rem;
+  color: #ca3c3f;
 }
-.auth-function-container{
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
+.auth-function-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
 }
-.auth-function{
-    color:#1b79d3;
-    text-align: left;
+.auth-function {
+  color: #1b79d3;
+  text-align: left;
+  text-decoration: none;
 }
-.auth-submit-btn{
-    margin-top: 50px;
+.auth-submit-btn {
+  margin-top: 50px;
+}
+.sub-title {
+  margin-bottom: 50px;
+  margin-top: 0.5rem;
+}
+@media (max-width: 767px) {
+  .sub-title {
+    text-align: center;
+    margin: 12px 4% 50px 4%;
+  }
+}
+
+/*dashboard page*/
+.dashboard-content {
+  margin: 5% auto;
+}
+.greeting-txt-container {
+  text-align: right;
+  padding: 0.5rem 1rem;
+}
+.greeting-txt1 {
+  color: #1b79d3;
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+.tab-left-nav {
+  flex-direction: column;
+}
+.tab-left-nav-item {
+  display: flex;
+  justify-content: flex-end;
+}
+.tab-left-nav-item > a {
+  color: #1b79d3;
+  font-weight: 800;
+}
+.tab-left-nav-itemlink {
+  max-width: 120px;
+  text-align: center;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #1b79d3;
+  font-weight: 800;
+  border-radius: 0;
+  background-color: #fff;
+  border-bottom: 3px solid #1b79d3;
+}
+@media (max-width:767px) {
+    .greeting-txt-container{
+        text-align: left;
+    }
+    .tab-left-nav{
+        flex-direction:row;
+        padding:0 1rem 1rem 1rem;
+        justify-content: center;
+    }
+    .greeting-txt-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        justify-content: center;
+    }
+    .greeting-txt2{
+        padding:0 0 0.5rem 1rem; 
+    }
+}
+
+/*Profile Page*/
+.profile-form {
+  margin: 0 5%;
+  max-width: 700px;
+}
+.profile-container {
+  justify-content: flex-start;
+  display: flex;
+}
+
+.profile-submit-btn{
+    padding: .375rem .75rem;
+    margin-top: 20px;
+}
+@media (max-width: 767px) {
+  .profile-container {
+    justify-content: center;
+  }
+  .profile-btn-container1 {
+    max-width: 197px;
+    margin: 0 auto;
+}
+
 }

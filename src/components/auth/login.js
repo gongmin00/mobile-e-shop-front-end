@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { navigate } from "gatsby";
 
-//forgot password
-//sign up
 
 const Login = () => {
   const { loginHandler, authInfo } = useContext(GlobalContext);
@@ -67,12 +65,14 @@ const Login = () => {
   console.log("authInfo", authInfo.user);
   return (
     <div className="regForm-container">
-      {authInfo.user && JSON.stringify(authInfo.user.email)}
+      {/* {authInfo.user && JSON.stringify(authInfo.user.email)} */}
       <Form className="regForm">
         {userData.errorMsg ? (
           <Alert variant="danger">{userData.errorMsg} </Alert>
         ) : null}
+        <h3 className="sub-title">Login to your account  </h3>
         <Form.Group className="email-container" controlId="formGroupEmail">
+          
           <Form.Label>Email</Form.Label>
           <Form.Control
             name="email"
@@ -91,8 +91,8 @@ const Login = () => {
           ></Form.Control>
           {eyeIcon}
           <div className="auth-function-container">
-            <Link to="/auth/reset-passpord" className="auth-function">Forgot Password?</Link>
-            <div className="auth-function">SignUp</div>
+            <Link to="/auth/reset-password" className="auth-function">Forgot Password?</Link>
+            <Link to="/auth/signup" className="auth-function">SignUp</Link>
           </div>
         </Form.Group>
         <Button className="auth-submit-btn" onClick={submitHandler} type="submit">

@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import { Form, Button, Alert } from "react-bootstrap";
 import "./authStyle.css";
+import { Link } from "@reach/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import firebase from "gatsby-plugin-firebase";
@@ -17,6 +18,7 @@ const Register = () => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
+    username:"",
     confirmPassword: "",
     errorMsg: null,
     successMsg: null,
@@ -47,8 +49,8 @@ const Register = () => {
       //   });
       // }
       try {
-        await signUpHandler(userData.email, userData.password)
-        // navigate("/auth/dashboard");
+        await signUpHandler(userData.email, userData.password,userData.username)
+        navigate("/auth/dashboard");
       }catch(error){
         setUserData({
           ...userData,
@@ -96,11 +98,22 @@ const Register = () => {
 console.log("authInfo.user",authInfo.user)
   return (
     <div className="regForm-container">
- {authInfo.user&&JSON.stringify(authInfo.user.email)}
+ {/* {authInfo.user&&JSON.stringify(authInfo.user.email)} */}
       <Form className="regForm">
       <div className="register-errorMsg">
          {userData.errorMsg ?  <Alert variant="danger">{userData.errorMsg}</Alert> : null}
         </div>
+        <h3 className="sub-title">Create an account for your smart resume</h3>
+        <Form.Group className="username-container" controlId="formGroupUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            name="username"
+            onChange={changeHandler}
+            type="text"
+            placeholder="Enter User Name"
+          ></Form.Control>
+        </Form.Group>
+
         <Form.Group className="email-container" controlId="formGroupEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -129,8 +142,11 @@ console.log("authInfo.user",authInfo.user)
             placeholder="Confirm Password"
           ></Form.Control>
           {eyeIcon2}
+          <div className="auth-function-container">
+            <div>Have account already? <Link to="/auth/login" className="auth-function">Login</Link></div>
+          </div>
         </Form.Group>
-        <Button onClick={submitHandler} type="submit">
+        <Button className="auth-submit-btn"  onClick={submitHandler} type="submit">
           Submit
         </Button>
       </Form>

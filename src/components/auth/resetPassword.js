@@ -5,7 +5,8 @@ const ResetPassword =()=> {
     const {resetPasswordHandler} = useContext(GlobalContext)
     const [resetData, setData] = useState({
         email:"",
-        errorMsg:""
+        errorMsg:"",
+        successMsg:""
     })
     const changeHandler = (event)=>{
         setData({
@@ -13,13 +14,18 @@ const ResetPassword =()=> {
             email:event.target.value
         })
     }
-    const resetHandler = ()=>{
+    const resetHandler = async (event)=>{
+      event.preventDefault()
         try {
-            resetPasswordHandler(resetData.email)
+            await resetPasswordHandler(resetData.email)
+            setData({
+              ...resetData,
+              successMsg:"Successfully sent reset email"
+          })
         }catch(error){
             setData({
                 ...resetData,
-                errorMsg:error
+                errorMsg:error.message
             })
         }
     }
@@ -29,6 +35,9 @@ const ResetPassword =()=> {
       <Form className="regForm">
         {resetData.errorMsg ? (
           <Alert variant="danger">{resetData.errorMsg} </Alert>
+        ) : null}
+        {resetData.successMsg ? (
+          <Alert variant="success">{resetData.successMsg} </Alert>
         ) : null}
         <Form.Group className="email-container" controlId="formGroupEmail">
           <Form.Label>Enter Email to Reset Password</Form.Label>

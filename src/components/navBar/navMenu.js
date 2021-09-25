@@ -15,7 +15,8 @@ const NavBar = () => {
           <ul className="nav-list">
             <li className="nav-list-item"><Link to="/builder">Create Free Resume</Link></li>
             <li className="nav-list-item"><Link to="/expert">Find an Expert</Link></li>
-            <li className="nav-list-item"><Link to="/auth/login"><Button className="nav-login-btn" variant="outline-primary">Login</Button></Link></li>
+            <li className="nav-list-item"><Link to="/auth/login">Log In</Link></li>
+            <li className="nav-list-item"><Link to="/auth/signup"><Button className="nav-login-btn" variant="outline-primary">Sign Up</Button></Link></li>
           </ul>
           <div className="dropdown-menu-container">
           <Dropdown />
