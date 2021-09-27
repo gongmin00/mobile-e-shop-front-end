@@ -54,7 +54,7 @@ const Register = () => {
       }catch(error){
         setUserData({
           ...userData,
-          errorMsg:error.message
+          errorMsg:error.message 
         })
       }
       

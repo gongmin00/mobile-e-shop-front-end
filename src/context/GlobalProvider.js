@@ -38,6 +38,11 @@ const GlobalProvider = (props) => {
   const updatePassword = (password) =>{
     return user.updatePassword(password)
   }
+  const updateUsername = (username)=>{
+    return user.updateProfile({
+      displayName:username
+    })
+  }
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       setAuthInfo({
@@ -59,6 +64,7 @@ const GlobalProvider = (props) => {
         resetPasswordHandler,
         updateEmail,
         updatePassword,
+        updateUsername,
         authInfo,
       }}
     >

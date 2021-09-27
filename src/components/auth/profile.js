@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import { Form, Button, Alert, Container, Row, Col } from "react-bootstrap";
 import "./authStyle.css";
@@ -9,21 +9,25 @@ import firebase from "gatsby-plugin-firebase";
 import { navigate } from "gatsby";
 
 const Profile = () => {
-  const { authInfo, signUpHandler } = useContext(GlobalContext);
+  const { authInfo, updateEmail, updatePassword, updateUsername } =
+    useContext(GlobalContext);
   const [showPassWord, setShowPassword] = useState({
     type1: "password",
     type2: "password",
   });
   const [userData, setUserData] = useState({
-    email: "",
-    password: "",
-    username: "",
-    confirmPassword: "",
+    // email: "",
+    // password: "",
+    // username: "",
+    // confirmPassword: "",
     errorMsg: null,
     successMsg: null,
     userAuthInfo: null,
   });
-
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
+  const usernameRef = useRef();
   const changeHandler = (event) => {
     setUserData({
       ...userData,
@@ -31,41 +35,53 @@ const Profile = () => {
     });
   };
   //use [] because target.name is uncertain and may be more than one
-  const submitHandler = async (event) => {
+
+  const editSubmitHandler = async (event) => {
     event.preventDefault();
-    if (userData.password === userData.confirmPassword) {
-      // try {
-      //   let result = await firebase
-      //     .auth()
-      //     .createUserWithEmailAndPassword(userData.email, userData.password);
-      //   getAuthInfo(result);
-      //   navigate("/auth/dashboard");
-      // } catch (error) {
-      //   console.log("submit error",error)
-      //   setUserData({
-      //     ...userData,
-      //     errorMsg: error.message,
-      //   });
-      // }
-      try {
-        await signUpHandler(
-          userData.email,
-          userData.password,
-          userData.username
-        );
-        navigate("/auth/dashboard");
-      } catch (error) {
+    const promise = [];
+    if (
+      emailRef.current.value) {
+        emailRef.current.value !== authInfo.user.email?
+          promise.push(updateEmail(emailRef.current.value)):
+          setUserData({
+            ...userData,
+            errorMsg: "this email has been used, please enter new email address",
+          })
+    }
+
+    if (passwordRef.current.value && confirmPasswordRef.current.value) {
+      passwordRef.current.value === confirmPasswordRef.current.value
+        ? promise.push(updatePassword(passwordRef.current.value))
+        : setUserData({
+            ...userData,
+            errorMsg: "the password didn't match",
+          });
+    }
+    if (usernameRef.current.value) {
+      usernameRef.current.value!==authInfo.user.displayName?
+      promise.push(updateUsername(usernameRef.current.value)):
+      setUserData({
+        ...userData,
+        errorMsg: "this username has been used, please enter different username",
+      });
+    }
+  
+    if(promise.length!==0){
+      Promise.all(promise)
+      .then((result) => {
+        setUserData({
+          ...userData,
+          successMsg: "successfully edited profile",
+        });
+      })
+      .catch((error) =>
         setUserData({
           ...userData,
           errorMsg: error.message,
-        });
-      }
-    } else {
-      setUserData({
-        ...userData,
-        errorMsg: "the password didn't match",
-      });
+        })
+      )
     }
+    
   };
 
   let eyeIcon = (
@@ -95,7 +111,7 @@ const Profile = () => {
       icon={showPassWord.type2 === "text" ? faEyeSlash : faEye}
     />
   );
-  console.log("authInfo.user", authInfo.user);
+
   return (
     <div className="regForm-container">
       {/* {authInfo.user&&JSON.stringify(authInfo.user.email)} */}
@@ -113,6 +129,7 @@ const Profile = () => {
                   name="username"
                   onChange={changeHandler}
                   type="text"
+                  ref={usernameRef}
                   placeholder={authInfo.user.displayName}
                 ></Form.Control>
               </Form.Group>
@@ -127,6 +144,7 @@ const Profile = () => {
                   name="email"
                   onChange={changeHandler}
                   type="email"
+                  ref={emailRef}
                   placeholder={authInfo.user.email}
                 ></Form.Control>
               </Form.Group>
@@ -143,6 +161,7 @@ const Profile = () => {
                   name="password"
                   onChange={changeHandler}
                   type={showPassWord.type1}
+                  ref={passwordRef}
                   placeholder="Enter New Password"
                 ></Form.Control>
                 {eyeIcon}
@@ -158,6 +177,7 @@ const Profile = () => {
                   name="confirmPassword"
                   onChange={changeHandler}
                   type={showPassWord.type2}
+                  ref={confirmPasswordRef}
                   placeholder="Confirm New Password"
                 ></Form.Control>
                 {eyeIcon2}
@@ -169,7 +189,7 @@ const Profile = () => {
               <div className="profile-btn-container1">
                 <Button
                   className="auth-submit-btn profile-submit-btn"
-                  onClick={submitHandler}
+                  onClick={editSubmitHandler}
                   type="submit"
                 >
                   Submit
@@ -179,9 +199,14 @@ const Profile = () => {
           </Row>
         </Container>
 
-        <div className="register-errorMsg">
+        <div className="profile-errorMsg">
           {userData.errorMsg ? (
             <Alert variant="danger">{userData.errorMsg}</Alert>
+          ) : null}
+        </div>
+        <div className="profile-successMsg">
+          {userData.successMsg ? (
+            <Alert variant="success">{userData.successMsg}</Alert>
           ) : null}
         </div>
       </Form>

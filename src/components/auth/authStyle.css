@@ -97,6 +97,7 @@
         align-items: center;
         justify-content: flex-start;
         justify-content: center;
+        flex-wrap: wrap;
     }
     .greeting-txt2{
         padding:0 0 0.5rem 1rem; 
@@ -116,6 +117,12 @@
 .profile-submit-btn{
     padding: .375rem .75rem;
     margin-top: 20px;
+}
+.profile-successMsg{
+  margin-top: 50px;
+}
+.profile-errorMsg{
+  margin-top: 50px;
 }
 @media (max-width: 767px) {
   .profile-container {
