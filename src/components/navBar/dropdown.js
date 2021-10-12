@@ -13,14 +13,14 @@ const Dropdown = () => {
   let menuIcon;
   if (dropDownMenu === false) {
     menuIcon = (
-      <div role="button" tabIndex={0} onClick={sideMenuHandler} className="menu-container">
+      <div role="button" tabIndex={0} onClick={sideMenuHandler} onKeyPress={sideMenuHandler} className="menu-container">
         <div className="toggle-button-line"> </div>
       </div>
     );
   } else {
     menuIcon = (
       <div className="dropdown-container">
-        <div role="button" tabIndex={0} onClick={sideMenuHandler} className="open-menu-container">
+        <div role="button" tabIndex={0} onClick={sideMenuHandler} onKeyPress={sideMenuHandler} className="open-menu-container">
           <div className="open-toggle-button-line"> </div>
         </div>
         <div className="dropdown-menu-container2">
@@ -32,7 +32,7 @@ const Dropdown = () => {
             <li><Link to="/auth/login">Login</Link></li>
           </ul>
         </div>
-        <div className="wide-click-div" onClick={sideMenuHandler}></div>
+        <div className="wide-click-div" onClick={sideMenuHandler} onKeyPress={sideMenuHandler} tabIndex={0} role="button"></div>
       </div>
     );
   }

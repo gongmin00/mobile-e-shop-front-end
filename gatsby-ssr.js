@@ -1,6 +1,7 @@
-import "firebase/auth"
-import GlobalProvider from "./src/context/GlobalProvider"
-import React from "react"
-export const wrapRootElement = ({element})=>(
-    <GlobalProvider>{element}</GlobalProvider>
-)
+// import "firebase/auth"
+// import AuthProvider from "./src/context/AuthProvider"
+// import BuilderProvider from "./src/context/BuilderProvider"
+// import React from "react"
+// export const wrapRootElement = ({element})=>(
+//     <AuthProvider>{element}</AuthProvider>
+// )

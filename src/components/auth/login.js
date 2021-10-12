@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
+import { AuthContext } from "../../context/AuthProvider";
 import { Form, Button, Alert } from "react-bootstrap";
 import "./authStyle.css";
 import {Link} from "@reach/router"
@@ -9,7 +9,7 @@ import { navigate } from "gatsby";
 
 
 const Login = () => {
-  const { loginHandler, authInfo } = useContext(GlobalContext);
+  const { loginHandler, authInfo } = useContext(AuthContext);
   const [showPassWord, setShowPassword] = useState({
     type1: "password",
   });

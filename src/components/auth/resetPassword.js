@@ -1,8 +1,8 @@
 import React, {useContext, useState} from 'react'
-import { GlobalContext } from '../../context/GlobalContext'
+import { AuthContext } from "../../context/AuthProvider";
 import {Form, Button, Alert} from "react-bootstrap"
 const ResetPassword =()=> {
-    const {resetPasswordHandler} = useContext(GlobalContext)
+    const {resetPasswordHandler} = useContext(AuthContext)
     const [resetData, setData] = useState({
         email:"",
         errorMsg:"",

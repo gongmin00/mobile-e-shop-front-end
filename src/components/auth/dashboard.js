@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
-import { Button, Tab, Nav, Row, Col, Container } from "react-bootstrap";
-import { navigate } from "gatsby-link";
+import { AuthContext } from "../../context/AuthProvider";
+import { Tab, Nav, Row, Col} from "react-bootstrap";
 import Profile from "./profile";
 const Dashboard = () => {
-  const { signOutHandler, authInfo } = useContext(GlobalContext);
-  const logoutHandler = () => {
-    signOutHandler();
-    navigate("/auth/login");
-  };
+  const {authInfo } = useContext(AuthContext);
+  // const logoutHandler = () => {
+  //   signOutHandler();
+  //   navigate("/auth/login");
+  // };
   console.log("authInfo in dashboard", authInfo.user);
   return (
     <div className="dashboard-content">

@@ -1,9 +1,10 @@
-import React, { useEffect, useReducer, useState } from "react";
-import globalReducer from "./globalReducer";
-import { GET_USER_AUTH } from "./type";
-import { GlobalContext } from "./GlobalContext";
-import firebase from "gatsby-plugin-firebase";
-const GlobalProvider = (props) => {
+import React, { useEffect, useState, createContext } from "react";
+import firebase from "gatsby-plugin-firebase"; 
+
+export const AuthContext = createContext()
+
+
+const AuthProvider = (props) => {
   const [authInfo, setAuthInfo] = useState({
     errorMsg: "",
     email: "",
@@ -56,7 +57,7 @@ const GlobalProvider = (props) => {
   }, []);
 
   return (
-    <GlobalContext.Provider
+    <AuthContext.Provider
       value={{
         signUpHandler,
         loginHandler,
@@ -69,8 +70,8 @@ const GlobalProvider = (props) => {
       }}
     >
       {authInfo.loading && props.children}
-    </GlobalContext.Provider>
+    </AuthContext.Provider>
   );
 };
 //这里面提供状态
-export default GlobalProvider;
+export default AuthProvider;

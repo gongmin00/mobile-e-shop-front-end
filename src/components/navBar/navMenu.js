@@ -4,11 +4,11 @@ import { Link } from "gatsby";
 import "./navStyle.css";
 import logo from "../../images/logo.png";
 import Dropdown from "./dropdown";
-import { GlobalContext } from "../../context/GlobalContext";
+import { AuthContext } from "../../context/AuthProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fas, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 const NavBar = () => {
-  const { authInfo, signOutHandler } = useContext(GlobalContext);
+  const { authInfo, signOutHandler } = useContext(AuthContext);
   const [clickDropdown, setDropdown] = useState(false);
   const dropdownHandler = () => {
     setDropdown(!clickDropdown);
@@ -17,7 +17,7 @@ const NavBar = () => {
   if (clickDropdown) {
     userNav = (
       <div className="user-dropdown-container"> 
-        <div onClick={dropdownHandler} className="user-dropdown-menu1">
+        <div onKeyPress={dropdownHandler} onClick={dropdownHandler} className="user-dropdown-menu1" role="button" tabIndex={0}>
           {authInfo.user?authInfo.user.displayName:null}
           <FontAwesomeIcon icon={faChevronDown} />
           <i class="fas fa-chevron-down"></i>
@@ -27,17 +27,17 @@ const NavBar = () => {
             <li className="nav-list-item">
               <Link to="/auth/dashboard">Account</Link>
             </li>
-            <li className="nav-list-item" onClick={signOutHandler}>
+            <li className="nav-list-item" onClick={signOutHandler} role="button" tabIndex={0} onKeyPress={signOutHandler}>
               <div>Sign out</div>
             </li>
           </ul>
         </div>
-        <div className="wide-click-div" onClick={dropdownHandler}></div>
+        <div className="wide-click-div" onClick={dropdownHandler} role="button" tabIndex={0} onKeyPress={dropdownHandler}>    </div>
       </div>
     );
   } else {
     userNav = (
-      <div onClick={dropdownHandler} className="user-dropdown-menu1">
+      <div onClick={dropdownHandler} className="user-dropdown-menu1" role="button" tabIndex={0} onKeyPress={dropdownHandler}>
         {authInfo.user?authInfo.user.displayName:null}
         <FontAwesomeIcon icon={faChevronDown} />
         <i class="fas fa-chevron-down"></i>

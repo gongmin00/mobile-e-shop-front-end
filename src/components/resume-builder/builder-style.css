@@ -1,0 +1,12 @@
+/*control panel page*/
+
+
+.control-panel-inner-container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    }
+    .control-panel-inner-container>a{
+    min-width: 33%;
+    text-align: center;
+}

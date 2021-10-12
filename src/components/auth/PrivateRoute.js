@@ -1,12 +1,10 @@
 import React, {useContext} from "react"
-import {GlobalContext} from "../../context/GlobalContext"
-import {Redirect, Router, Route} from "@reach/router"
+import {AuthContext} from "../../context/AuthProvider"
 import { navigate } from "gatsby-link"
 const PrivateRoute =({component:Component, ...rest})=>{
-    const {authInfo}=useContext(GlobalContext)
-    // const { loginHandler, authInfo} = useContext(GlobalContext);
+    const {authInfo}=useContext(AuthContext)
+    // const { loginHandler, authInfo} = useContext(AuthContext);
     // const test = false
-   console.log("authInfo in private route", authInfo)
     // return(
     //     <Router 
     //     {...rest}

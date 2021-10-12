@@ -1,16 +1,16 @@
 import React, { useState, useContext } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
+import { AuthContext } from "../../context/AuthProvider";
 import { Form, Button, Alert } from "react-bootstrap";
 import "./authStyle.css";
 import { Link } from "@reach/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import firebase from "gatsby-plugin-firebase";
+// import firebase from "gatsby-plugin-firebase";
 import { navigate } from "gatsby";
 
 //login
 const Register = () => {
-  const {authInfo, signUpHandler} = useContext(GlobalContext);
+  const {authInfo, signUpHandler} = useContext(AuthContext);
   const [showPassWord, setShowPassword] = useState({
     type1: "password",
     type2: "password",

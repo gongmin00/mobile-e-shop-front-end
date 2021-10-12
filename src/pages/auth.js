@@ -7,7 +7,7 @@ import Signup from "../components/auth/signup";
 import Dashboard from "../components/auth/dashboard";
 import ResetPassword from "../components/auth/resetPassword";
 const Auth = () => {
-  // const {authInfo}=useContext(GlobalProvider)
+ 
   return (
     <Router>
       <PrivateRoute path="/auth/dashboard" component={Dashboard} />
