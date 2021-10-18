@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createContext } from "react";
 import firebase from "gatsby-plugin-firebase"; 
-
+import "firebase/storage";
 export const AuthContext = createContext()
 
 
@@ -13,6 +13,7 @@ const AuthProvider = (props) => {
   });
   // const [State, dispatch] = useReducer(globalReducer, initState);
   const user = firebase.auth().currentUser;
+  //sign up with email, password and username
   const signUpHandler = (email, password, username) => {
     return firebase
       .auth()
@@ -21,9 +22,11 @@ const AuthProvider = (props) => {
         
         user.updateProfile({
           displayName: username,
+
         });
       });
   };
+
   const loginHandler = (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   };
@@ -51,6 +54,7 @@ const AuthProvider = (props) => {
         user: user,
         loading: true,
       });
+      // firebase.storage().ref(`${user.email}`)
     });
 
     return unsubscribe;

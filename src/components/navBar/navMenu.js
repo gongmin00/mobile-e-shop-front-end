@@ -14,11 +14,12 @@ const NavBar = () => {
     setDropdown(!clickDropdown);
   };
   let userNav;
+  let admin="admin"
   if (clickDropdown) {
     userNav = (
       <div className="user-dropdown-container"> 
         <div onKeyPress={dropdownHandler} onClick={dropdownHandler} className="user-dropdown-menu1" role="button" tabIndex={0}>
-          {authInfo.user?authInfo.user.displayName:null}
+          {authInfo.user.displayName?authInfo.user.displayName:"New User"}
           <FontAwesomeIcon icon={faChevronDown} />
           <i class="fas fa-chevron-down"></i>
         </div>
@@ -38,7 +39,7 @@ const NavBar = () => {
   } else {
     userNav = (
       <div onClick={dropdownHandler} className="user-dropdown-menu1" role="button" tabIndex={0} onKeyPress={dropdownHandler}>
-        {authInfo.user?authInfo.user.displayName:null}
+        {authInfo.user.displayName?authInfo.user.displayName:"New User"}
         <FontAwesomeIcon icon={faChevronDown} />
         <i class="fas fa-chevron-down"></i>
       </div>
@@ -61,7 +62,8 @@ const NavBar = () => {
                 <Link to="/expert">Find an Expert</Link>
               </li>
               <li className="nav-list-item">
-                {authInfo.user ? userNav : <Link to="/auth/login">Log In</Link>}
+                
+                { authInfo.user ? userNav : <Link to="/auth/login">Log In</Link>}
               </li>
 
               {/* <li className="nav-list-item"><Link to="/auth/login">Log In</Link></li> */}

@@ -28,7 +28,7 @@ export const ProfileImageUpload = ({
           onChange={(e) => onChangeHandler(e.target.files[0])}
         ></Form.Control>
         
-        <Button onClick={() => imageUploadHandler(uploadImage)}>submit</Button>
+        <Button onClick={() => imageUploadHandler(uploadImage, "data.profile.photo")}>Upload</Button>
       </Form.Group>
     );
   
