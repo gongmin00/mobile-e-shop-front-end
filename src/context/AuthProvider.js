@@ -1,8 +1,7 @@
 import React, { useEffect, useState, createContext } from "react";
-import firebase from "gatsby-plugin-firebase"; 
+import firebase from "gatsby-plugin-firebase";
 import "firebase/storage";
-export const AuthContext = createContext()
-
+export const AuthContext = createContext();
 
 const AuthProvider = (props) => {
   const [authInfo, setAuthInfo] = useState({
@@ -19,11 +18,11 @@ const AuthProvider = (props) => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        
-        user.updateProfile({
+        result.user.updateProfile({
           displayName: username,
-
         });
+        // firebase.storage().ref(result.email)
+        // console.log("result",result)
       });
   };
 
@@ -36,17 +35,17 @@ const AuthProvider = (props) => {
   const resetPasswordHandler = (email) => {
     return firebase.auth().sendPasswordResetEmail(email);
   };
-  const updateEmail=(email)=>{
-    return user.updateEmail(email)
-  }
-  const updatePassword = (password) =>{
-    return user.updatePassword(password)
-  }
-  const updateUsername = (username)=>{
+  const updateEmail = (email) => {
+    return user.updateEmail(email);
+  };
+  const updatePassword = (password) => {
+    return user.updatePassword(password);
+  };
+  const updateUsername = (username) => {
     return user.updateProfile({
-      displayName:username
-    })
-  }
+      displayName: username,
+    });
+  };
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       setAuthInfo({
@@ -54,7 +53,6 @@ const AuthProvider = (props) => {
         user: user,
         loading: true,
       });
-      // firebase.storage().ref(`${user.email}`)
     });
 
     return unsubscribe;
