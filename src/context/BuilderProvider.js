@@ -2,65 +2,9 @@ import React, { createContext, useReducer } from "react";
 import { CHANGE_INPUT } from "./actionType";
 import { builderReducer } from "./globalReducer";
 import firebase from "gatsby-plugin-firebase";
-import "firebase/storage";
+import {initResumeContent} from "./globalReducer"
 
-const initResumeContent = {
-  data: {
-    profile: {
-      heading: "Profile",
-      photo: "",
-      firstName: "",
-      lastName: "",
-      subtitle: "",
-      address: {
-        line1: "",
-        line2: "",
-        line3: "",
-      },
-      phone: "",
-      website: "",
-      email: "",
-    },
-    objective: {
-      heading: "Objective",
-      body: "",
-    },
-    work: {
-      heading: "Work Experience",
-      items: [],
-    },
-    education: {
-      heading: "Education",
-      items: [],
-    },
-    awards: {
-      heading: "Honors & Awards",
-      items: [],
-    },
-    certifications: {
-      heading: "Certifications",
-      items: [],
-    },
-    skills: {
-      heading: "Skills & Hobbies",
-      items: [],
-    },
-    extras: {
-      heading: "Personal Information",
-      items: [],
-    },
-  },
-  themes: {
-    font: {
-      family: "",
-    },
-    colors: {
-      background: "",
-      accent: "",
-      body: "",
-    },
-  },
-};
+
 
 export const BuilderContext = createContext();
 
@@ -69,6 +13,7 @@ const BuilderProvider = (props) => {
     builderReducer,
     initResumeContent
   );
+  //sent resume input to react context 
   const inputChangeHandler = (key, value) => {
     dispatch({
       type: CHANGE_INPUT,
@@ -78,6 +23,8 @@ const BuilderProvider = (props) => {
       },
     });
   };
+
+  //upload resume profile image to google firebase storage
   const imageUploadHandler = (uploadImage, key) => {
     
     const uploadTask = firebase

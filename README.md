@@ -30,4 +30,10 @@ Account
     profile
     downlaod
     logout
-    
+
+Reminder:
+1. firebase storage create a file named as user's email when user sign up. But it will create a false file called profile. Fix it by replacing it with resume pdf
+
+
+Question:
+1. why useRef need click evnet to work

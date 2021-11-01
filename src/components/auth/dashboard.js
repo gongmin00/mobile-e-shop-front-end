@@ -11,14 +11,14 @@ const Dashboard = () => {
   console.log("authInfo in dashboard", authInfo.user);
   return (
     <div className="dashboard-content">
-      <Tab.Container defaultActiveKey="first">
+      <Tab.Container defaultActiveKey="first" defaultActiveKey="profile">
         <Row>
           <Col sm="12" md="4">
             <div className="greeting-txt-container">
               <div className="greeting-txt1">Welcome back</div>{" "}
               <div className="greeting-txt2">{authInfo.user.displayName}</div>
             </div>
-            <Nav variant="pills" className="tab-left-nav">
+            <Nav variant="pills" className="tab-left-nav" >
               <Nav.Item className="tab-left-nav-item">
                 <Nav.Link className="tab-left-nav-itemlink" eventKey="profile">
                   My Profile
@@ -41,6 +41,7 @@ const Dashboard = () => {
           </Col>
         </Row>
       </Tab.Container>
+      
       {/* <Button onClick={logoutHandler}>Log out</Button> */}
     </div>
   );

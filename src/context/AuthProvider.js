@@ -1,6 +1,7 @@
 import React, { useEffect, useState, createContext } from "react";
 import firebase from "gatsby-plugin-firebase";
 import "firebase/storage";
+import "firebase/firestore";
 export const AuthContext = createContext();
 
 const AuthProvider = (props) => {
@@ -8,9 +9,10 @@ const AuthProvider = (props) => {
     errorMsg: "",
     email: "",
     user: null,
+    photo: "",
     loading: false,
   });
-  // const [State, dispatch] = useReducer(globalReducer, initState);
+
   const user = firebase.auth().currentUser;
   //sign up with email, password and username
   const signUpHandler = (email, password, username) => {
@@ -21,7 +23,7 @@ const AuthProvider = (props) => {
         result.user.updateProfile({
           displayName: username,
         });
-        // firebase.storage().ref(result.email)
+        firebase.storage().ref(`${result.user.email}/profile-image/`).put();
         // console.log("result",result)
       });
   };
@@ -46,15 +48,49 @@ const AuthProvider = (props) => {
       displayName: username,
     });
   };
+  const updateProfileImage = (uploadImage) => {
+    if (authInfo.user.email) {
+      const uploadTask = firebase
+        .storage()
+        .ref(`${authInfo.user.email}/profile-image/${uploadImage.name}`)
+        .put(uploadImage);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        //get task progress
+        (error) => console.log("user profile image upload error:", error),
+        () => {
+          firebase
+            .storage()
+            .ref(`${authInfo.user.email}`)
+            .child(uploadImage.name)
+            .getDownloadURL()
+            .then((photoUrl) => {
+              setAuthInfo({
+                ...authInfo,
+                photo: photoUrl,
+              });
+              //update profile photo with local context data
+              user.updateProfile({
+                photoURL:photoUrl
+              })
+              //update profile photo to firebase auth
+            });
+        }
+      );
+    }
+  };
+  //get current user by re-render page in useEffect and because authProvider component at top tree, it can be reach everywhere
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       setAuthInfo({
         ...authInfo,
         user: user,
+        photo:user.photoURL,
         loading: true,
       });
+      //request profile photo from firebase auth
     });
-
     return unsubscribe;
   }, []);
 
@@ -69,6 +105,7 @@ const AuthProvider = (props) => {
         updatePassword,
         updateUsername,
         authInfo,
+        updateProfileImage,
       }}
     >
       {authInfo.loading && props.children}

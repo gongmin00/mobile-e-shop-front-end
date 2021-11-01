@@ -14,7 +14,7 @@ const NavBar = () => {
     setDropdown(!clickDropdown);
   };
   let userNav;
-  let admin="admin"
+  console.log("test", authInfo.user)
   if (clickDropdown) {
     userNav = (
       <div className="user-dropdown-container"> 
@@ -24,7 +24,7 @@ const NavBar = () => {
           <i class="fas fa-chevron-down"></i>
         </div>
         <div className="user-dropdown-menu2">
-          <ul className="user-nav-list">
+          <ul onKeyPress={dropdownHandler} onClick={dropdownHandler} className="user-nav-list">
             <li className="nav-list-item">
               <Link to="/auth/dashboard">Account</Link>
             </li>

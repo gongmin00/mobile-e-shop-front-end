@@ -124,6 +124,18 @@
 .profile-errorMsg{
   margin-top: 50px;
 }
+.profile-img{
+  max-width: 145px;
+    margin-bottom: 40px;
+}
+.profile-Image-control-container{
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.profile-Image-control{
+  margin-bottom: 1rem;
+}
 @media (max-width: 767px) {
   .profile-container {
     justify-content: center;

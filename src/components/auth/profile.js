@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 // import firebase from "gatsby-plugin-firebase";
 // import { navigate } from "gatsby";
-
+import defaultProfileImg from "../../images/profile_default_img.png"
 const Profile = () => {
-  const { authInfo, updateEmail, updatePassword, updateUsername } =
+  const { authInfo, updateEmail, updatePassword, updateUsername, updateProfileImage } =
     useContext(AuthContext);
   const [showPassWord, setShowPassword] = useState({
     type1: "password",
@@ -28,6 +28,7 @@ const Profile = () => {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const usernameRef = useRef();
+  const userLocalPhoto = useRef()
   const changeHandler = (event) => {
     setUserData({
       ...userData,
@@ -83,6 +84,12 @@ const Profile = () => {
     }
     
   };
+  const userPhotoUploadHandler =()=>{
+    const photoFile = userLocalPhoto.current.files[0]
+    if(photoFile){
+      updateProfileImage(photoFile)
+    }
+  }
 
   let eyeIcon = (
     <FontAwesomeIcon
@@ -111,6 +118,7 @@ const Profile = () => {
       icon={showPassWord.type2 === "text" ? faEyeSlash : faEye}
     />
   );
+  // const test =()=>{console.log("upload file",userLocalPhoto.current.files[0].name )}
 
   return (
     <div className="regForm-container">
@@ -118,6 +126,14 @@ const Profile = () => {
       <Form className="profile-form">
         <Container>
           <h3 className="sub-title">Account Settings</h3>
+          <Row className="Profile-img-container">
+          <img className="profile-img" src={authInfo.photo?authInfo.photo:defaultProfileImg} alt="default user profile avatar"/>
+          <Form.Group className="profile-Image-control-container">
+            <Form.Label className="profile-image-control-label profile-Image-control">Edit Your Profile Image (Max 10MB)</Form.Label>
+            <Form.Control  className="profile-image-control-input profile-Image-control" name="photo" type="file" ref={userLocalPhoto}></Form.Control>
+            <Button className="profile-image-control-btn profile-Image-control" onClick={userPhotoUploadHandler}>Upload</Button>
+          </Form.Group>
+          </Row>
           <Row>
             <Col className="profile-container" sm="12" md="6">
               <Form.Group

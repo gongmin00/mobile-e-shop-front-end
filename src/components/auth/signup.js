@@ -103,7 +103,7 @@ console.log("authInfo.user",authInfo.user)
       <div className="register-errorMsg">
          {userData.errorMsg ?  <Alert variant="danger">{userData.errorMsg}</Alert> : null}
         </div>
-        <h3 className="sub-title">Create an account for your smart resume</h3>
+        <h3 className="sub-title">Create an account to save your smart resume</h3>
         <Form.Group className="username-container" controlId="formGroupUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
