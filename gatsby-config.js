@@ -22,13 +22,13 @@ module.exports = {
       resolve: "gatsby-plugin-firebase",
       options: {
         credentials: {
-          apiKey: process.env.apiKey,
-          authDomain:process.env.authDomain,
-          projectId:process.env.projectId,
-          storageBucket: process.env.storageBucket,
-          messagingSenderId: process.env.messagingSenderId,
-          appId:process.env.appId ,
-          measurementId: process.env.measurementId,
+          apiKey: process.env.FIREBASE_APIKEY,
+          authDomain:process.env.FIREBASE_AUTHDOMAIN,
+          projectId:process.env.FIREBASE_PROJECTID,
+          storageBucket: process.env.FIREBASE_STORAGEBUCKET,
+          messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
+          appId:process.env.FIREBASE_APPID ,
+          measurementId: process.env.FIREBASE_MEASUREMENTID,
         }
       },
     },

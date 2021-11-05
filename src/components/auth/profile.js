@@ -2,12 +2,11 @@ import React, { useState, useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import { Form, Button, Alert, Container, Row, Col } from "react-bootstrap";
 import "./authStyle.css";
-// import { Link } from "@reach/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-// import firebase from "gatsby-plugin-firebase";
-// import { navigate } from "gatsby";
 import defaultProfileImg from "../../images/profile_default_img.png"
+import {toast, ToastContainer} from "react-toastify"
+import "react-toastify/dist/reactToastify.css"
 const Profile = () => {
   const { authInfo, updateEmail, updatePassword, updateUsername, updateProfileImage } =
     useContext(AuthContext);
@@ -16,10 +15,6 @@ const Profile = () => {
     type2: "password",
   });
   const [userData, setUserData] = useState({
-    // email: "",
-    // password: "",
-    // username: "",
-    // confirmPassword: "",
     errorMsg: null,
     successMsg: null,
     userAuthInfo: null,
@@ -35,60 +30,72 @@ const Profile = () => {
       [event.target.name]: event.target.value,
     });
   };
-  //use [] because target.name is uncertain and may be more than one
 
-  const editSubmitHandler = async (event) => {
+  const editSubmitHandler = async (event) => {  
     event.preventDefault();
     const promise = [];
     if (
       emailRef.current.value) {
         emailRef.current.value !== authInfo.user.email?
           promise.push(updateEmail(emailRef.current.value)):
-          setUserData({
-            ...userData,
-            errorMsg: "this email has been used, please enter new email address",
-          })
+          // setUserData({
+          //   ...userData,
+          //   errorMsg: "this email has been used, please enter new email address",
+          // })
+          toast.error("this email has been used, please enter new email address")
     }
 
     if (passwordRef.current.value && confirmPasswordRef.current.value) {
       passwordRef.current.value === confirmPasswordRef.current.value
         ? promise.push(updatePassword(passwordRef.current.value))
-        : setUserData({
-            ...userData,
-            errorMsg: "the password didn't match",
-          });
+        // : setUserData({
+        //     ...userData,
+        //     errorMsg: "the password didn't match",
+        //   });
+        :toast.error("the password didn't match")
     }
     if (usernameRef.current.value) {
       usernameRef.current.value!==authInfo.user.displayName?
       promise.push(updateUsername(usernameRef.current.value)):
-      setUserData({
-        ...userData,
-        errorMsg: "this username has been used, please enter different username",
-      });
+      // setUserData({
+      //   ...userData,
+      //   errorMsg: "this username has been used, please enter different username",
+      // });
+      toast.error("this username has been used, please enter different username")
     }
   
     if(promise.length!==0){
       Promise.all(promise)
       .then((result) => {
-        setUserData({
-          ...userData,
-          successMsg: "successfully edited profile",
-        });
+        // setUserData({
+        //   ...userData,
+        //   successMsg: "successfully edited profile",
+        // });
+        toast.success("successfully edited profile information")
       })
       .catch((error) =>
-        setUserData({
-          ...userData,
-          errorMsg: error.message,
-        })
+        // setUserData({
+        //   ...userData,
+        //   errorMsg: error.message,
+        // })
+        toast.error(error.message)
       )
     }
     
   };
   const userPhotoUploadHandler =()=>{
-    const photoFile = userLocalPhoto.current.files[0]
-    if(photoFile){
-      updateProfileImage(photoFile)
-    }
+    const photoFile = userLocalPhoto.current.files[0] 
+    const photoTypeArray = ["image/jpeg", "image/png"]
+    if (photoFile){
+      if (!photoTypeArray.includes(photoFile.type)){
+        toast.error("please upload image in jpeg or png format")
+      } else if (photoFile.size>2097152){
+        toast.error("please upload image no bigger than 2MB")
+      } else {
+        updateProfileImage(photoFile)
+        toast.success("profile image updated")
+      }
+    }  
   }
 
   let eyeIcon = (
@@ -118,20 +125,19 @@ const Profile = () => {
       icon={showPassWord.type2 === "text" ? faEyeSlash : faEye}
     />
   );
-  // const test =()=>{console.log("upload file",userLocalPhoto.current.files[0].name )}
 
   return (
     <div className="regForm-container">
-      {/* {authInfo.user&&JSON.stringify(authInfo.user.email)} */}
       <Form className="profile-form">
         <Container>
           <h3 className="sub-title">Account Settings</h3>
           <Row className="Profile-img-container">
           <img className="profile-img" src={authInfo.photo?authInfo.photo:defaultProfileImg} alt="default user profile avatar"/>
           <Form.Group className="profile-Image-control-container">
-            <Form.Label className="profile-image-control-label profile-Image-control">Edit Your Profile Image (Max 10MB)</Form.Label>
+            <Form.Label className="profile-image-control-label profile-Image-control">Edit Your Profile Image (Max 2MB)</Form.Label>
             <Form.Control  className="profile-image-control-input profile-Image-control" name="photo" type="file" ref={userLocalPhoto}></Form.Control>
             <Button className="profile-image-control-btn profile-Image-control" onClick={userPhotoUploadHandler}>Upload</Button>
+            <ToastContainer position="top-center" autoClose={5000} />
           </Form.Group>
           </Row>
           <Row>
@@ -215,7 +221,7 @@ const Profile = () => {
           </Row>
         </Container>
 
-        <div className="profile-errorMsg">
+        {/* <div className="profile-errorMsg">
           {userData.errorMsg ? (
             <Alert variant="danger">{userData.errorMsg}</Alert>
           ) : null}
@@ -224,7 +230,8 @@ const Profile = () => {
           {userData.successMsg ? (
             <Alert variant="success">{userData.successMsg}</Alert>
           ) : null}
-        </div>
+        </div> */}
+        <ToastContainer position="top-center" autoClose={5000} />
       </Form>
     </div>
   );

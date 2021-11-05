@@ -23,7 +23,7 @@ const AuthProvider = (props) => {
         result.user.updateProfile({
           displayName: username,
         });
-        firebase.storage().ref(`${result.user.email}/profile-image/`).put();
+        firebase.storage().ref(`${result.user.email}/index`).put();
         // console.log("result",result)
       });
   };
@@ -62,7 +62,7 @@ const AuthProvider = (props) => {
         () => {
           firebase
             .storage()
-            .ref(`${authInfo.user.email}`)
+            .ref(`${authInfo.user.email}/profile-image/`)
             .child(uploadImage.name)
             .getDownloadURL()
             .then((photoUrl) => {
@@ -82,11 +82,12 @@ const AuthProvider = (props) => {
   };
   //get current user by re-render page in useEffect and because authProvider component at top tree, it can be reach everywhere
   useEffect(() => {
+    console.log("touch effect ")
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       setAuthInfo({
         ...authInfo,
         user: user,
-        photo:user.photoURL,
+        photo:user?user.photoURL:null,
         loading: true,
       });
       //request profile photo from firebase auth

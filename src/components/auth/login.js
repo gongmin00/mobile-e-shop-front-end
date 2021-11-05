@@ -6,7 +6,8 @@ import {Link} from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { navigate } from "gatsby";
-
+import {toast, ToastContainer} from "react-toastify"
+import "react-toastify/dist/reactToastify.css"
 
 const Login = () => {
   const { loginHandler, authInfo } = useContext(AuthContext);
@@ -17,8 +18,6 @@ const Login = () => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
-    errorMsg: null,
-    successMsg: null,
   });
   const changeHandler = (event) => {
     setUserData({
@@ -40,12 +39,14 @@ const Login = () => {
     try {
       await loginHandler(userData.email, userData.password);
       navigate("/auth/dashboard");
-      // test()
     } catch (error) {
-      setUserData({
-        ...userData,
-        errorMsg: error,
-      });
+      // setUserData({
+      //   ...userData,
+      //   errorMsg: error,
+      // });
+      toast.error(error.message)
+    } finally{
+      toast.success("You have successfully logged in to Smart Resume")
     }
   };
 
@@ -67,9 +68,10 @@ const Login = () => {
     <div className="regForm-container">
       {/* {authInfo.user && JSON.stringify(authInfo.user.email)} */}
       <Form className="regForm">
-        {userData.errorMsg ? (
+        {/* {userData.errorMsg ? (
           <Alert variant="danger">{userData.errorMsg} </Alert>
-        ) : null}
+        ) : null} */}
+        <ToastContainer position="top-center" autoClose={5000} />
         <h3 className="sub-title">Login to your account  </h3>
         <Form.Group className="email-container" controlId="formGroupEmail">
           

@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import { Form, Button, Alert } from "react-bootstrap";
 import "./authStyle.css";
 import { Link } from "@reach/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-// import firebase from "gatsby-plugin-firebase";
+import {toast, ToastContainer} from "react-toastify"
+import "react-toastify/dist/reactToastify.css"
 import { navigate } from "gatsby";
 
 //login
@@ -20,11 +21,8 @@ const Register = () => {
     password: "",
     username:"",
     confirmPassword: "",
-    errorMsg: null,
-    successMsg: null,
-    userAuthInfo: null,
   });
-
+  
   const changeHandler = (event) => {
     setUserData({
       ...userData,
@@ -35,37 +33,25 @@ const Register = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
     if (userData.password === userData.confirmPassword){
-      // try {
-      //   let result = await firebase
-      //     .auth()
-      //     .createUserWithEmailAndPassword(userData.email, userData.password);
-      //   getAuthInfo(result);
-      //   navigate("/auth/dashboard");
-      // } catch (error) {
-      //   console.log("submit error",error)
-      //   setUserData({
-      //     ...userData,
-      //     errorMsg: error.message,
-      //   });
-      // }
       try {
         await signUpHandler(userData.email, userData.password,userData.username)
         navigate("/auth/dashboard");
+        toast.success("You have successfully created accout")
       }catch(error){
-        setUserData({
-          ...userData,
-          errorMsg:error.message 
-        })
-      }
-      
-  
+        // setUserData({
+        //   ...userData,
+        //   errorMsg:error.message 
+        // })
+        toast.error(error.message)
+      } 
     } else {
-      setUserData({
-        ...userData,
-        errorMsg:"the password didn't match"
-      })
+      // setUserData({
+      //   ...userData,
+      //   errorMsg:"the password didn't match"
+      // })
+      toast.error("the password didn't match")
     }
-    
+
   };
 
   let eyeIcon = (
@@ -95,13 +81,15 @@ const Register = () => {
       icon={showPassWord.type2 === "text" ? faEyeSlash : faEye}
     />
   );
-console.log("authInfo.user",authInfo.user)
+
+   
   return (
     <div className="regForm-container">
  {/* {authInfo.user&&JSON.stringify(authInfo.user.email)} */}
       <Form className="regForm">
       <div className="register-errorMsg">
-         {userData.errorMsg ?  <Alert variant="danger">{userData.errorMsg}</Alert> : null}
+         {/* {userData.errorMsg ?  <Alert variant="danger">{userData.errorMsg}</Alert> : null} */}
+         <ToastContainer position="top-center" autoClose={5000} />
         </div>
         <h3 className="sub-title">Create an account to save your smart resume</h3>
         <Form.Group className="username-container" controlId="formGroupUsername">
