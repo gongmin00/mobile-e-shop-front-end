@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Tabs, Tab } from "react-bootstrap";
-import ProfileTab from "./content-tab/profileTab"
+import ProfileTab from "./contentTab/profileTab"
 const ControlPanel = () => {
   const [tabKey, setTabKey] = useState("content");
   return (

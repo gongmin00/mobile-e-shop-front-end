@@ -1,7 +1,10 @@
 import React, { useEffect, useState, createContext } from "react";
 import firebase from "gatsby-plugin-firebase";
-import "firebase/storage";
-import "firebase/firestore";
+// import "firebase/storage";
+// import "firebase/firestore";
+// import "firebase/firebase-database"
+import initResumeData from "../data/initResumeData.json"
+import ShortUniqueId from "short-unique-id";
 export const AuthContext = createContext();
 
 const AuthProvider = (props) => {
@@ -15,7 +18,10 @@ const AuthProvider = (props) => {
 
   const user = firebase.auth().currentUser;
   //sign up with email, password and username
+  const radomId = new ShortUniqueId({length:10})
+
   const signUpHandler = (email, password, username) => {
+    const resumeId = radomId()
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -24,7 +30,10 @@ const AuthProvider = (props) => {
           displayName: username,
         });
         firebase.storage().ref(`${result.user.email}/index`).put();
-        // console.log("result",result)
+        // create file path in firebase stroage
+        firebase.database().ref(`users/${result.user.uid}/resumes/${resumeId}`).set(initResumeData)
+        //create user JSON records in firebase realtime database
+
       });
   };
 
@@ -48,6 +57,7 @@ const AuthProvider = (props) => {
       displayName: username,
     });
   };
+  //firebase auth methods
   const updateProfileImage = (uploadImage) => {
     if (authInfo.user.email) {
       const uploadTask = firebase
@@ -80,9 +90,9 @@ const AuthProvider = (props) => {
       );
     }
   };
+  //firebase storage method
   //get current user by re-render page in useEffect and because authProvider component at top tree, it can be reach everywhere
   useEffect(() => {
-    console.log("touch effect ")
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       setAuthInfo({
         ...authInfo,

@@ -63,7 +63,6 @@ const Login = () => {
       icon={showPassWord.type1 === "text" ? faEyeSlash : faEye}
     />
   );
-  console.log("authInfo", authInfo.user);
   return (
     <div className="regForm-container">
       {/* {authInfo.user && JSON.stringify(authInfo.user.email)} */}

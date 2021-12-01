@@ -42,6 +42,7 @@ const Register = () => {
         //   ...userData,
         //   errorMsg:error.message 
         // })
+        console.log("signup error:",error.message)
         toast.error(error.message)
       } 
     } else {

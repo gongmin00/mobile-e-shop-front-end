@@ -1,18 +1,24 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 import { CHANGE_INPUT } from "./actionType";
 import { builderReducer } from "./globalReducer";
 import firebase from "gatsby-plugin-firebase";
 import {initResumeContent} from "./globalReducer"
-
+import {AuthContext} from "./AuthProvider"
 
 
 export const BuilderContext = createContext();
 
 const BuilderProvider = (props) => {
+  const {authInfo} = useContext(AuthContext)
   const [resumeContentState, dispatch] = useReducer(
     builderReducer,
     initResumeContent
   );
+
+
+  const getResumeHandler = async ()=>{
+
+  }
   //sent resume input to react context 
   const inputChangeHandler = (key, value) => {
     dispatch({

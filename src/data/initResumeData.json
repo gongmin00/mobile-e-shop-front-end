@@ -1,0 +1,15 @@
+{   "resumeId":"",
+    "profile":{
+        "heading":"Profile",
+        "photo":"",
+        "firstName":"",
+        "lastName":"",
+        "address":{
+            "line":"",
+            "city":"",
+            "postCode":""
+        },
+        "email":"",
+        "website":""
+    }
+}

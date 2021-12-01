@@ -1,0 +1,20 @@
+/* :root {
+    --fontawesomeIcon-upload-btn:{
+
+    }
+} */
+@import url("//use.fontawesome.com/releases/v5.15.3/css/all.css");
+.fontawesomeIcon-upload-btn{
+    visibility: hidden;
+}
+.fontawesomeIcon-upload-btn:before{
+    font-family: "Font Awesome 5 Free";
+    content: "\f574";
+    display: inline-block;
+    font-style: normal;
+    font-weight: 900;
+    font-size:40px;
+    color:#1b79d3;
+    visibility:visible;
+    cursor: pointer;
+}
