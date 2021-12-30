@@ -30,10 +30,21 @@ Account
     profile
     downlaod
     logout
-
+Dashboard 
+    > resume > exist resume
+	cover letter ?
+	find an expert
+	post to job search site
+    
 Reminder:
 1. firebase storage create a file named as user's email when user sign up. But it will create a false file called profile. Fix it by replacing it with resume pdf
 
 
 Question:
 1. why useRef need click evnet to work
+
+
+## Theme Elements
+# Global Font
+(1) Primary font: 
+

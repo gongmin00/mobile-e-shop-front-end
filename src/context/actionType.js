@@ -1,1 +1,3 @@
 export const CHANGE_INPUT ="CHANGE_INPUT"
+export const GET_ALL_RESUME_DATA = "GET_ALL_RESUME_DATA"
+export const GET_RESUME_ID = "GET_RESUME_ID"

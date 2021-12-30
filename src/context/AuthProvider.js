@@ -82,7 +82,6 @@ const AuthProvider = (props) => {
   };
   //get current user by re-render page in useEffect and because authProvider component at top tree, it can be reach everywhere
   useEffect(() => {
-    console.log("touch effect ")
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       setAuthInfo({
         ...authInfo,

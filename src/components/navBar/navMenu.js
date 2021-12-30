@@ -14,14 +14,14 @@ const NavBar = () => {
     setDropdown(!clickDropdown);
   };
   let userNav;
-  console.log("test", authInfo.user)
+  console.log("test", authInfo)
   if (clickDropdown) {
     userNav = (
       <div className="user-dropdown-container"> 
         <div onKeyPress={dropdownHandler} onClick={dropdownHandler} className="user-dropdown-menu1" role="button" tabIndex={0}>
           {authInfo.user && authInfo.user.displayName?authInfo.user.displayName:"New User"}
           <FontAwesomeIcon icon={faChevronDown} />
-          <i class="fas fa-chevron-down"></i>
+          <i className="fas fa-chevron-down"></i>
         </div>
         <div className="user-dropdown-menu2">
           <ul onKeyPress={dropdownHandler} onClick={dropdownHandler} className="user-nav-list">
@@ -41,7 +41,7 @@ const NavBar = () => {
       <div onClick={dropdownHandler} className="user-dropdown-menu1" role="button" tabIndex={0} onKeyPress={dropdownHandler}>
         {authInfo.user && authInfo.user.displayName?authInfo.user.displayName:"New User"}
         <FontAwesomeIcon icon={faChevronDown} />
-        <i class="fas fa-chevron-down"></i>
+        <i className="fas fa-chevron-down"></i>
       </div>
     );
   }

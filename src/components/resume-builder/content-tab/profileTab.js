@@ -4,7 +4,6 @@ import { BuilderContext } from "../../../context/BuilderProvider"
 const ProfileTab = () => {
   const { inputChangeHandler, imageUploadHandler, resumeContentState } = useContext(BuilderContext);
   const [uploadImage, setUploadImage] = useState()
-  console.log("what is file",uploadImage)
   return (
     <div>
       <ProfileImageUpload 

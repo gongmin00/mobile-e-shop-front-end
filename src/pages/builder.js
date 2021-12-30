@@ -1,25 +1,26 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
+import { Router } from "@reach/router";
 import { Container, Row, Col } from "react-bootstrap";
-import ControlPanel from "../components/resume-builder/controlPanel";
-import MainDisplay from "../components/resume-builder/mainDisplay";
-import Greeny from "../components/template/greeny";
+import LeftPanel from "../components/resume-builder/leftPanel";
+import CenterPanel from "../components/resume-builder/centerPanel";
+import RightPanel from "../components/resume-builder/rightPanel";
 import "./pageStyle.css";
-
+import ResumeDashboard from "../components/resume-builder/centerDashboard";
 const Builder = () => {
-
   return (
     <div className="builder-container">
+
       <Container className="builder-inner-container">
         <Row>
           <Col sm="12" md="3">
-            <ControlPanel />
+            <LeftPanel />
           </Col>
           <Col sm="12" md="6">
-            <MainDisplay />
+            <CenterPanel />
           </Col>
           <Col sm="12" md="3">
-            <Greeny />
+            <RightPanel />
           </Col>
         </Row>
       </Container>

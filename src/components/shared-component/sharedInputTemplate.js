@@ -5,7 +5,7 @@ import { Form, Button, Alert } from "react-bootstrap";
 export const SharedInputTemplate = ({ onInputChange, labelName }) => {
   return (
     <div className="builder-input-container">
-      <label for={labelName}>{labelName}</label>
+      <label htmlFor={labelName}>{labelName}</label>
       <input
         onChange={(e) => onInputChange(e.target.value)}
         id={`builder-input-${labelName}`}

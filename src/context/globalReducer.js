@@ -9,11 +9,14 @@
 //             return state
 //     }
 // }
-import {CHANGE_INPUT} from "./actionType"
-import set from "loadsh/set"
+import { CHANGE_INPUT, GET_ALL_RESUME_DATA, GET_RESUME_ID } from "./actionType";
+import set from "loadsh/set";
 
-export const initResumeContent = {
-  data: {
+export const builderContent = {
+  resumeID:"",
+  resumeData: [],
+  resumeInitData: {
+    resumeID: "",
     profile: {
       heading: "Profile",
       photo: "",
@@ -57,15 +60,16 @@ export const initResumeContent = {
       heading: "Personal Information",
       items: [],
     },
-  },
-  themes: {
-    font: {
-      family: "",
-    },
-    colors: {
-      background: "",
-      accent: "",
-      body: "",
+
+    themes: {
+      font: {
+        family: "",
+      },
+      colors: {
+        background: "",
+        accent: "",
+        body: "",
+      },
     },
   },
 };
@@ -73,13 +77,12 @@ export const initResumeContent = {
 export const builderReducer = (state, action) => {
   switch (action.type) {
     case CHANGE_INPUT:
-      return set({...state}, action.payload.key, action.payload.value)
-        
-        // [action.payload.key]:action.payload.value
-        
-      
-
+      return set({ ...state }, action.payload.key, action.payload.value);
+    case GET_ALL_RESUME_DATA:
+      return { ...state, resumeData: action.payload };
+    // case GET_RESUME_ID:
+    //   return { ...state, resumeID: action.payload };
     default:
-      return {...state};
+      return { ...state };
   }
 };

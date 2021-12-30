@@ -49,5 +49,3 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-//profile
-//my resume

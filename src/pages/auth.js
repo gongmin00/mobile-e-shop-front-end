@@ -7,13 +7,12 @@ import Signup from "../components/auth/signup";
 import Dashboard from "../components/auth/dashboard";
 import ResetPassword from "../components/auth/resetPassword";
 const Auth = () => {
- 
   return (
     <Router>
       <PrivateRoute path="/auth/dashboard" component={Dashboard} />
       <Login path="/auth/login" />
       <Signup path="/auth/signup" />
-      <ResetPassword path="/auth/reset-password"/>
+      <ResetPassword path="/auth/reset-password" />
     </Router>
   );
 };

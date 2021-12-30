@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Tabs, Tab } from "react-bootstrap";
 import ProfileTab from "./content-tab/profileTab"
-const ControlPanel = () => {
+const LeftPanel = () => {
   const [tabKey, setTabKey] = useState("content");
   return (
     <Container>
@@ -43,4 +43,4 @@ const ControlPanel = () => {
   );
 };
 
-export default ControlPanel;
+export default LeftPanel;

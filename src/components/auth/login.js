@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button} from "react-bootstrap";
 import "./authStyle.css";
 import {Link} from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -63,7 +63,7 @@ const Login = () => {
       icon={showPassWord.type1 === "text" ? faEyeSlash : faEye}
     />
   );
-  console.log("authInfo", authInfo.user);
+
   return (
     <div className="regForm-container">
       {/* {authInfo.user && JSON.stringify(authInfo.user.email)} */}
