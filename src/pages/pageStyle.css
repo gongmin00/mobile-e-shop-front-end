@@ -7,3 +7,42 @@
     margin:0;
     max-width: 100%;
 }
+
+.display-dashboard-modal-btn a {
+    color:aliceblue;
+    text-decoration: none;
+}
+.resume-tab-heading{
+    line-height: 80px;
+    display: block;
+}
+.tab-container .nav-item.nav-link.active {
+    border-color: #fff #fff #1b79d3;
+    border-bottom-width: 3px;
+}
+.tab-item {
+    padding:2rem 0;
+}
+.promo-container{
+    box-shadow: rgb(23 68 130 / 6%) 0px 8px 32px, rgb(23 68 130 / 48%) 0px 0px 1px;
+    padding:4rem;
+    margin-bottom: 2rem;
+}
+.resume-item-col{
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+.resume-link {
+    text-decoration: none;
+    color:black;
+}
+.resume-item{
+    box-shadow: rgb(23 68 130 / 6%) 0px 8px 32px, rgb(23 68 130 / 48%) 0px 0px 1px;
+    height:100%;
+    width: 72%;
+    text-align: center;
+}
+.resume-item:hover {
+    cursor: pointer;
+}

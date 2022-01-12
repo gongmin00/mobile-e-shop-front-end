@@ -26,7 +26,7 @@ const Dropdown = () => {
         <div className="dropdown-menu-container2">
           <ul>
             <li>
-              <Link to="/builder">Create Free Resume</Link>
+              <Link to="/builder/dashboard">Create Free Resume</Link>
             </li>
             <li><Link to="/expert">Find an Expert</Link></li>
             <li><Link to="/auth/login">Login</Link></li>

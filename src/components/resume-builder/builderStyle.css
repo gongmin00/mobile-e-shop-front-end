@@ -12,6 +12,9 @@
 }
 
 /* centerDashboard */
+.display-dashboard-container{
+    margin:0 15%;
+}
 .display-dashboard-modal-btn a {
     color:aliceblue;
     text-decoration: none;
@@ -35,11 +38,32 @@
 .resume-item-col{
     display: flex;
     justify-content: center;
+    margin: 1.5rem 0;
+}
+.resume-link {
+    text-decoration: none;
+    color:black;
 }
 .resume-item{
     box-shadow: rgb(23 68 130 / 6%) 0px 8px 32px, rgb(23 68 130 / 48%) 0px 0px 1px;
     height:100%;
     width: 72%;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+}
+.resume-item:hover {
+    cursor: pointer;
+}
+
+/*resume preview*/
+.resume-preview-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 130px;
+    height: 168px;
+    justify-content: center;
+    box-shadow: rgb(23 68 130 / 6%) 0px 8px 32px, rgb(23 68 130 / 48%) 0px 0px 1px;
 }

@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { CHANGE_INPUT, GET_ALL_RESUME_DATA, GET_RESUME_ID } from "./actionType";
+import {
+  CHANGE_INPUT,
+  GET_ALL_RESUME_DATA,
+  GET_SINGLE_RESUME_DATA,
+} from "./actionType";
 import firebase from "gatsby-plugin-firebase";
 import "firebase/database";
 import {
@@ -19,7 +23,7 @@ const BuilderProvider = (props) => {
   //   initResumeContent
   // );
   // const [resumeData, dispatch] = useReducer(builderReducer, builderContent);
-  const [resumeData, dispatch] = useReducer(builderReducer, builderContent)
+  const [resumeData, dispatch] = useReducer(builderReducer, builderContent);
   const { authInfo } = useContext(AuthContext);
   const randomResumeId = new ShortUniqueId({ length: 10 });
 
@@ -59,40 +63,46 @@ const BuilderProvider = (props) => {
   };
   const createNewResume = () => {
     const resumeId = randomResumeId();
-    resumeInitData.resumeId=resumeId
+    resumeInitData.resumeId = resumeId;
     firebase
       .database()
       .ref(`users/${authInfo.user.uid}/resumes/${resumeId}`)
       .set(resumeInitData);
   };
 
-  const getResumeID = () => {
-    const resumeIdArray =[]
-    const resumeArray =[]
+  const getResumeData = () => {
+    const resumeIdArray = [];
+    const resumeArray = [];
     firebase
       .database()
       .ref(`users/${authInfo.user.uid}/resumes/`)
       .once("value")
-      .then(
-        (dataSnapshot)=>{
-          const data = dataSnapshot.val()
-          if(data){
-            Object.keys(data).forEach(key=>{
-              resumeIdArray.push(key)
-              resumeArray.push(data[key]) 
-            })
-            
-          }
-          // dispatch({
-          //   type: GET_RESUME_ID,
-          //   payload: resumeIdArray
-          // })
-          dispatch({
-            type:GET_ALL_RESUME_DATA,
-            payload:resumeArray
-          })
-        }       
-      );
+      .then((dataSnapshot) => {
+        const data = dataSnapshot.val();
+        if (data) {
+          Object.keys(data).forEach((key) => {
+            resumeIdArray.push(key);
+            resumeArray.push(data[key]);
+          });
+        }
+        // dispatch({
+        //   type: GET_RESUME_ID,
+        //   payload: resumeIdArray
+        // })
+        dispatch({
+          type: GET_ALL_RESUME_DATA,
+          payload: resumeArray,
+        });
+      });
+  };
+  const getSingleResumeData = (resumeId) => {
+    firebase
+      .database()
+      .ref(`users/${authInfo.user.uid}/resumes/${resumeId}`)
+      .once(`value`)
+      .then((singleDataSnapshot) => {
+        dispatch({ type: GET_SINGLE_RESUME_DATA, payload: singleDataSnapshot.val() });
+      });
   };
   // const userResumeSnapshot = () => {
   //   const resumeArray = [];
@@ -127,14 +137,11 @@ const BuilderProvider = (props) => {
   return (
     <BuilderContext.Provider
       value={{
-        // inputChangeHandler,
         imageUploadHandler,
-        // resumeContentState,
-        // resumeData,
         createNewResume,
-        // userResumeSnapshot,
-        getResumeID,
-        resumeData
+        getResumeData,
+        resumeData,
+        getSingleResumeData,
       }}
     >
       {props.children}

@@ -14,7 +14,7 @@ const NavBar = () => {
     setDropdown(!clickDropdown);
   };
   let userNav;
-  console.log("test", authInfo)
+
   if (clickDropdown) {
     userNav = (
       <div className="user-dropdown-container"> 
@@ -56,7 +56,7 @@ const NavBar = () => {
           <Col xs="7" sm="7" md="9" lg="9" className="nav-list-container">
             <ul className="nav-list">
               <li className="nav-list-item">
-                <Link to="/builder">Create Free Resume</Link>
+                <Link to="/builder/dashboard">Create Free Resume</Link>
               </li>
               <li className="nav-list-item">
                 <Link to="/expert">Find an Expert</Link>

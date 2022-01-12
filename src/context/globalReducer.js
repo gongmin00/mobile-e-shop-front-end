@@ -9,69 +9,69 @@
 //             return state
 //     }
 // }
-import { CHANGE_INPUT, GET_ALL_RESUME_DATA, GET_RESUME_ID } from "./actionType";
+import { CHANGE_INPUT, GET_ALL_RESUME_DATA, GET_SINGLE_RESUME_DATA } from "./actionType";
 import set from "loadsh/set";
 
 export const builderContent = {
-  resumeID:"",
   resumeData: [],
-  resumeInitData: {
-    resumeID: "",
-    profile: {
-      heading: "Profile",
-      photo: "",
-      firstName: "",
-      lastName: "",
-      subtitle: "",
-      address: {
-        line1: "",
-        line2: "",
-        line3: "",
-      },
-      phone: "",
-      website: "",
-      email: "",
-    },
-    objective: {
-      heading: "Objective",
-      body: "",
-    },
-    work: {
-      heading: "Work Experience",
-      items: [],
-    },
-    education: {
-      heading: "Education",
-      items: [],
-    },
-    awards: {
-      heading: "Honors & Awards",
-      items: [],
-    },
-    certifications: {
-      heading: "Certifications",
-      items: [],
-    },
-    skills: {
-      heading: "Skills & Hobbies",
-      items: [],
-    },
-    extras: {
-      heading: "Personal Information",
-      items: [],
-    },
+  singleResumeData:[]
+  // resumeInitData: {
+  //   resumeID: "",
+  //   profile: {
+  //     heading: "Profile",
+  //     photo: "",
+  //     firstName: "",
+  //     lastName: "",
+  //     subtitle: "",
+  //     address: {
+  //       line1: "",
+  //       line2: "",
+  //       line3: "",
+  //     },
+  //     phone: "",
+  //     website: "",
+  //     email: "",
+  //   },
+  //   objective: {
+  //     heading: "Objective",
+  //     body: "",
+  //   },
+  //   work: {
+  //     heading: "Work Experience",
+  //     items: [],
+  //   },
+  //   education: {
+  //     heading: "Education",
+  //     items: [],
+  //   },
+  //   awards: {
+  //     heading: "Honors & Awards",
+  //     items: [],
+  //   },
+  //   certifications: {
+  //     heading: "Certifications",
+  //     items: [],
+  //   },
+  //   skills: {
+  //     heading: "Skills & Hobbies",
+  //     items: [],
+  //   },
+  //   extras: {
+  //     heading: "Personal Information",
+  //     items: [],
+  //   },
 
-    themes: {
-      font: {
-        family: "",
-      },
-      colors: {
-        background: "",
-        accent: "",
-        body: "",
-      },
-    },
-  },
+  //   themes: {
+  //     font: {
+  //       family: "",
+  //     },
+  //     colors: {
+  //       background: "",
+  //       accent: "",
+  //       body: "",
+  //     },
+  //   },
+  // },
 };
 
 export const builderReducer = (state, action) => {
@@ -82,6 +82,8 @@ export const builderReducer = (state, action) => {
       return { ...state, resumeData: action.payload };
     // case GET_RESUME_ID:
     //   return { ...state, resumeID: action.payload };
+    case GET_SINGLE_RESUME_DATA: 
+      return {...state, singleResumeData:action.payload}
     default:
       return { ...state };
   }

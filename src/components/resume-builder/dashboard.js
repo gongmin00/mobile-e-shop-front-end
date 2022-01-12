@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import BuilderProvider, { BuilderContext } from "../../context/BuilderProvider";
 import { AuthContext } from "../../context/AuthProvider";
-import { Link } from "@reach/router";
+import { Link, Redirect } from "@reach/router";
 import {
   Modal,
   Button,
@@ -15,47 +15,47 @@ import {
 import "./builderStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas, faPlus } from "@fortawesome/free-solid-svg-icons";
-
-const CenterDashboard = () => {
+import ResumePreview from "./resumePreview";
+const Dashboard = () => {
   const [isModalShow, setModalShow] = useState(true);
   const [tabKey, setTabKey] = useState("resume");
   const { authInfo } = useContext(AuthContext);
-  const { userResumeSnapshot, createNewResume, getResumeID,
-    resumeData} =
+  const { createNewResume, getResumeData, resumeData } =
     useContext(BuilderContext);
-  const resumeArray = [];
-  // const resumeIdArray = [];
   useEffect(async () => {
-    // userResumeSnapshot();
-    getResumeID()
+    getResumeData();
   }, []);
-  // resumeData.resumeData.forEach(key=>{console.log("resume data key", key)})
-  console.log("resume data key", resumeData.resumeData)
-  // const modalHandler = () => {
-  //   createNewResume()
-  // };
-  // const resumeSnapshotHandler = () => {
-  //   userResumeSnapshot();
-  // };
-  // Object.keys(resumeData.resumeData).forEach((key) => {
-  //   // resumeArray[key]=resumeData.resumeData[key]
-  //   resumeIdArray.push(key);
-  // });
-  // resumeArray.forEach(item=>console.log("test work:", item))
 
+  const previewHandler = () => {
+    <Link to="/builder/edit"></Link>;
+  };
   const resumePreviewList = (
     <div className="resume-list-container">
       <Container>
         <Row>
           {resumeData.resumeData.map((element) => {
             return (
-              <Col key={element.resumeId} className="resume-item-col" sm="12" md="4" lg="3">
-                <div  className="resume-item" >{element.profile.firstName}</div>
+              <Col
+                key={element.resumeId}
+                className="resume-item-col"
+                sm="12"
+                md="4"
+                lg="3"
+              >
+                <Link
+                  className="resume-link"
+                  to="/builder/edit"
+                  state={{resumeId:element.resumeId}}
+                >
+                  <ResumePreview singleResumeData={element}/>
+                </Link>
               </Col>
             );
           })}
           <Col className="resume-item-col" sm="12" md="4" lg="3">
-                <div className="resume-item"><FontAwesomeIcon onClick={createNewResume} icon={faPlus}/></div>
+            <div className="resume-item">
+              <FontAwesomeIcon onClick={createNewResume} icon={faPlus} />
+            </div>
           </Col>
         </Row>
       </Container>
@@ -112,4 +112,4 @@ const CenterDashboard = () => {
   );
 };
 
-export default CenterDashboard;
+export default Dashboard;

@@ -1,6 +1,7 @@
-import React from 'react'
-// import {BuilderContext} from "../../../context/BuilderProvider"
-const Greeny = ()=>{
+import React, {useEffect, useContext} from 'react'
+import { BuilderContext } from '../../../context/BuilderProvider'
+
+const CornflowerBlue = ()=>{
     // const {resumeContentState} = useContext(BuilderContext)
 //    const [test, setMyTest] = useState("")
     // const handler = ()=>{
@@ -8,6 +9,7 @@ const Greeny = ()=>{
     //     console.log(test )
     // }
     // console.log("template data", resumeContentState)
+    const {} = useContext(BuilderContext)
     return(
         <div className="resume-style-template-container">
         {/* <div>{resumeContentState.data.profile.photo}</div> */}
@@ -17,4 +19,4 @@ const Greeny = ()=>{
     )
 }
 
-export default Greeny
+export default CornflowerBlue
